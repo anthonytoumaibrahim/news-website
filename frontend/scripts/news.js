@@ -6,9 +6,13 @@ const getArticles = async () => {
     dataType: "json",
     success: (result) => {
       const articles = result.articles;
-      articles.forEach((article) => {
-        articlesContainer.append(generateArticleCard(article));
-      });
+      if (articles.length > 0) {
+        articles.forEach((article) => {
+          articlesContainer.append(generateArticleCard(article));
+        });
+        return;
+      }
+      articlesContainer.html("No articles yet :(");
     },
     error: (error) => {
       articlesContainer.html(

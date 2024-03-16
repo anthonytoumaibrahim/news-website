@@ -1,17 +1,22 @@
-const articlesContainer = document.getElementById("articles-container");
+const articlesContainer = $("#articles-container");
 
 const getArticles = async () => {
-  try {
-    const response = await fetch(API_URLS.getArticles);
-    const data = await response.json();
-    const articles = data.articles;
-    articles.forEach((article) => {
-      articlesContainer.innerHTML += generateArticleCard(article);
-    });
-  } catch (error) {
-    articlesContainer.innerHTML = `Sorry, something went wrong! The error was logged to the console.`;
-    console.log(error);
-  }
+  $.ajax({
+    url: API_URLS.getArticles,
+    dataType: "json",
+    success: (result) => {
+      const articles = result.articles;
+      articles.forEach((article) => {
+        articlesContainer.append(generateArticleCard(article));
+      });
+    },
+    error: (error) => {
+      articlesContainer.html(
+        "Sorry, something went wrong! The error was logged to the console."
+      );
+      console.log(error);
+    },
+  });
 };
 
 const generateArticleCard = (article) => {

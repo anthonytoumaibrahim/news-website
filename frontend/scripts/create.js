@@ -28,7 +28,7 @@ createForm.on("submit", (e) => {
       responseMessage.toggleClass("alert-success", result.success);
       responseMessage.html(result.message);
       if (result.success) {
-        articlesContainer.append(generateArticleCard(result.article));
+        articlesContainer.prepend(generateArticleCard(result.article));
       }
     },
     error: (error) => {

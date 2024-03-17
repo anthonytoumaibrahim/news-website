@@ -1,12 +1,14 @@
 const articlesContainer = $("#articles-container");
 
 const getArticles = async () => {
+  articlesContainer.html("Just a sec, getting news articles...");
   $.ajax({
     url: API_URLS.getArticles,
     dataType: "json",
     success: (result) => {
       const articles = result.articles;
       if (articles.length > 0) {
+        articlesContainer.html("");
         articles.forEach((article) => {
           articlesContainer.append(generateArticleCard(article));
         });
@@ -18,7 +20,7 @@ const getArticles = async () => {
       articlesContainer.html(
         "Sorry, something went wrong! The error was logged to the console."
       );
-      console.log(error);
+      console.log(error.responseText);
     },
   });
 };

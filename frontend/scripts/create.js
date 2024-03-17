@@ -33,9 +33,9 @@ createForm.on("submit", (e) => {
     },
     error: (error) => {
       responseMessage.html(
-        "Sorry, an error occurred. Please see the log for more information."
+        "Sorry, an error occurred. Please see the console for more information."
       );
-      console.log(error);
+      console.log(error.responseText);
     },
   });
 });
